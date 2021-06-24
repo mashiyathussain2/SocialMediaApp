@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>FOX</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        {% block head %}
+         <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        {% endblock head %}
+    </head>
+    <body>
+    <nav style="margin-bottom:1.5rem; background-color: #3944BC !important;
+    font-size: 14px;
+    font-weight: bold;">
+    <div class="nav-wrapper">
+      <a href="" class="brand-logo">Fox</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      {% if user.is_authenticated %}
+        <li><a href="/home/">Hello, {{user.first_name}}{{user.last_name}}</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+        {% else %}
+        <li><a href="/auth/login">Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+    {% block content %}
+    {% endblock content %}
+
+     <!-- Compiled and minified JavaScript -->
+  
+
+    {% block footer %}{% endblock footer %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/static/social/social.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      var elems = document.querySelectorAll('.modal');
+      var instances = M.Modal.init(elems, {} );
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.materialboxed');
+    var instances = M.Materialbox.init(elems, {});
+  });
+    </script>
+
+
+    </body>
+</html>

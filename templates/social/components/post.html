@@ -1,0 +1,36 @@
+<div class="card">
+<span class="card-title" style="margin-left: 30px; font-weight: bold;">{{ post.user.first_name }} {{ post.user.last_name }}</span>
+  <div class="card-image">
+    {% if post.image %}
+      <center><img class="materialboxed" src="/media/{{ post.image }}" style="width:45%"></center>
+    {% endif %}
+  </div>
+  <div class="card-content">
+    <h5>
+      {{ post.content }}
+    </h5>
+    <span style="font-size:0.8rem;">{{ post.created_at }}</span>
+  </div>
+  <div class="card-action" style="background-color:blue">
+    <a href="#" onclick="likePost({{post.id}})" Style="color: white"> {{ post.like_set.count }} <i class="material-icons" style="font-size:1.5rem; ">favorite</i><!--Likes--></a>
+    <a class="modal-trigger" href="#postModal{{post.id}}" Style="color: white"><!--{{ post.comment_set.count }}--> <i class="material-icons" style="font-size:1.5rem;">comment</i></a>
+  </div>
+</div>
+
+<div id="postModal{{post.id}}" class="modal">
+  <div class="modal-content">
+    <h4>Comments</h4>
+    <ul>
+      {% for comment in post.comment_set.all %}
+        <li>{{ comment.user.first_name }} - {{ comment.content }}</li>
+      {% endfor %}
+    </ul>
+    <form onsubmit="commentPost({{post.id}}, document.getElementById('comment{{post.id}}').value);">
+      <div class="input-field">
+        <input id="comment{{post.id}}" type="text" class="validate">
+        <label for="comment{{post.id}}">Comment</label>
+        <button type="submit" class="btn waves-effect" style="background-color: #3944BC !important"><i class="material-icons right">send</i>Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
